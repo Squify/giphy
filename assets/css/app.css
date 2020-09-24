@@ -1,0 +1,22 @@
+body {
+    background-color: #121212;
+    margin-left: 7%;
+    margin-right: 7%;
+    color: #FFFFFF;
+}
+
+.form-inline .form-control {
+    margin-top: 5px;
+    width: -webkit-fill-available;
+    border-radius: 0.01em;
+}
+
+a {
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.gradient-purple-yellow {
+    background: rgb(108,9,121);
+    background: linear-gradient(231deg, rgba(108,9,121,1) 0%, rgba(117,20,114,1) 5%, rgba(255,145,0,1) 100%);
+}

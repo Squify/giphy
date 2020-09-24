@@ -1,0 +1,71 @@
+<nav class="navbar navbar-expand-lg" style="display: unset">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div style="display: flex; flex-direction: column">
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <a class="navbar-brand" href="{{ url('homepage.index') }}">
+                <img src="https://upload.wikimedia.org/wikipedia/fr/a/a0/Giphy_logo.gif"
+                     width="135" height="30" alt="">
+            </a>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('homepage.index') }}">Accueil</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Catégories
+                    </a>
+                    {# { get_categories() } #}
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% for category in get_categories() | filter(value => value.parent == null ) %}
+                            <a style="font-size: 20px" class="dropdown-item"
+                               href="{{ url('category.index', { categorySlug: category.slug }) }}">{{ category.name | title }}</a>
+                            {% for sub_category in get_categories() | filter(value => value.parent == category ) %}
+                                <a class="dropdown-item"
+                                   href="{{ url('category.subcategory', { categorySlug: category.slug, subcategorySlug: sub_category.slug } ) }}">{{ sub_category.name | title }}</a>
+                            {% endfor %}
+                            <div class="dropdown-divider"></div>
+                        {% endfor %}
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('security.logout') }}">Déconnexion</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('security.login') }}">Connexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('registration.register') }}">Enregistrement</a>
+                    </li>
+
+                {% endif %}
+            </ul>
+        </div>
+        <div>
+            <form action="{{ path('search.index') }}">
+                <div class="input-group mb-3">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="search">
+                    <div class="input-group-append">
+                        <button class="btn gradient-purple-yellow" type="submit">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                                <path fill-rule="evenodd"
+                                      d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>

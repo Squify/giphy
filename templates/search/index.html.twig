@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Résultats de la recherche "<i>{{ search }}</i>"</h1>
+    {% if result == null or result == '' %}
+        <div>
+            <img src="{{ asset('img/no_result.gif') }}" alt="" class="img-fluid">
+        </div>
+    {% else %}
+        <div class="row">
+            {% for gif in result %}
+                <div style="margin: 10px">
+                    <a href="{{ url('gif.index', { gifSlug: gif.Slug }) }}">
+                        <img style="width: 140px; height: 140px" src="{{ asset('img/' ~ gif.source) }}" alt=""
+                             class="img-fluid">
+                    </a>
+                    <p>{{ gif.slug }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

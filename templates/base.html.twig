@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+        <link rel="shortcut icon" href="https://cdn.worldvectorlogo.com/logos/giphy-logo-1.svg" />
+		<title>{% block title %}GIPHY | Search All the GIFs{% endblock %}</title>
+		{{ encore_entry_link_tags('app') }}
+		{% block stylesheets %}{% endblock %}
+	</head>
+	<body style="background-color: #121212">
+		{% include "components/navbar.html.twig" %}
+		{% block body %}{% endblock %}
+		{{ encore_entry_script_tags('app') }}
+		{% block javascripts %}{% endblock %}
+	</body>
+</html>

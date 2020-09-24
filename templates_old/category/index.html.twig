@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'components/navbar.html.twig' %}
+    {% for category in get_categories() | filter(value => value.parent == null) %}
+        <a href="{{ url('category.index', {categorySlug : category.slug }) }}   ">{{ category.name }}</a>
+    {% endfor %}
+    {% for sub in sub_categories %}
+        {{ sub.name }}
+    {% endfor %}
+{% endblock %}
